@@ -140,6 +140,7 @@ if __name__ == '__main__':
         
         df.columns = df.columns.astype(int)
         submtrx = df[idx].loc[idx]
+        submtrx = submtrx.applymap(log)
         final_sum = submtrx.sum().sum()/2
 
         with open(f'SDS-N{len(df)}-n{n}.txt', 'w') as f:

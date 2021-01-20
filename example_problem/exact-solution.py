@@ -4,6 +4,7 @@ from itertools import combinations
 import numpy as np
 import pandas as pd
 from time import time
+from math import log
 
 START = time()
 
@@ -18,6 +19,7 @@ mtrx = pd.read_csv(f'toy-{N}x{N}-dataset.csv', skiprows=1, header=None)
 sums = []
 for subset in combinations(mtrx.index, n):
    submtrx = mtrx[list(subset)].loc[list(subset)]
+   submtrx = submtrx.applymap(log)
    sums.append(submtrx.sum().sum()/2)
    
 

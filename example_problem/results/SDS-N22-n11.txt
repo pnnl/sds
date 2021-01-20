@@ -1,2 +1,2 @@
-final RMSD sum:  32.23472590066344 
-0.001015448570251465 min
+Total dissimiarity between items of the 11th set:  -38.62210037775907 
+0.0006730675697326661 min
