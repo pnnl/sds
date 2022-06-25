@@ -7,7 +7,7 @@ The pairwise relation is a floating point value where larger values indicate
 greater dissimilarity, and where the pairwise relation between item i and itself is represented
 as np.nan (this allows the program to work with numpy log conversion and sums).
 
-SDS was originally written to find the subset of n most dissimliar conformers 
+SDS was originally written to find the subset of n most dissimiliar conformers 
 (similarity being determined by average pairwise RMSD between atoms).
 In the original implemenation finding the n most dissimlar conformers 
 for 50000x50000 matricies, SDS substationally outperformed a benchmark random sampling method in both 
