@@ -7,6 +7,16 @@ To Run SDS
 ------------
 Use python 3 to run SDS on the command line, or follow the step-by-step jupyter notebook.
 
+Command line
+```
+python sds.py --mtrx <square_matrix_file_path> --ndis <n_most_dissimilar_items> --benchmark <True/False>
+```
+
+Jupyter notebook
+
+[Here](https://github.com/FelicityN/sds/blob/master/SDS/SDS-notebook-tutorial.ipynb)
+
+
 Citing SDS
 -------------
 If you would like to reference SDS in an academic paper, we ask you include the following.
