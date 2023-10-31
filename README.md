@@ -1,7 +1,25 @@
 SDS
 =======
-Similarity Downselection (SDS) is a heuristic, greedy algorithm instantiated in python for finding the subset of n items most dissimilar to each other 
-out of a larger population.
+Similarity down-selection (SDS) is a heuristic, greedy algorithm instantiated in Python for finding the subset of n items most dissimilar to each other out of a larger population.
+
+SDS heuristically finds the most dissimilar set of size `n`
+out of a population represented as an NxN matrix where the ith row (as well as the
+ith column) belong to item i, and the element (i,j) is some pairwise relation between 
+items i and j. 
+
+The pairwise relation is a floating point value where larger values indicate
+greater dissimilarity, and where the pairwise relation between item i and itself is represented
+as np.nan (this allows the program to work with numpy log conversion and sums).
+
+SDS was originally written to find the subset of n most dissimiliar conformers 
+(similarity being determined by average pairwise RMSD between atoms).
+In the original implemenation finding the n most dissimlar conformers 
+for 50000x50000 matricies, SDS substationally outperformed a benchmark random sampling method in both 
+time and accuracy. 
+
+Note that because SDS finds the set of size `n` by building off of set `n-1`, finding set `n` also finds
+also previous set sizes from 2-n. 
+
 
 To Run SDS
 ------------
