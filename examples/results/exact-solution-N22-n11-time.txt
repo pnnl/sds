@@ -1,0 +1,2 @@
+Exact solution N = 22, n = 11
+23.392971754074097  min

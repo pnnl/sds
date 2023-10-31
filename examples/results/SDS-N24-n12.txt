@@ -1,0 +1,2 @@
+Total dissimiarity between items of the 12th set:  -45.66509141182249 
+0.0007880171140034994 min

@@ -1,0 +1,2 @@
+Total dissimiarity between items of the 10th set:  -22.969743260303858 
+0.0022384365399678546 min

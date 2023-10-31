@@ -1,0 +1,2 @@
+Exact solution N = 24, n = 12
+92.82536662022272  min

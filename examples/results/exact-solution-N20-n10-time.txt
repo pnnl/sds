@@ -1,0 +1,2 @@
+Exact solution N = 20, n = 10
+5.809864330291748  min
