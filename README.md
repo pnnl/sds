@@ -21,18 +21,12 @@ Note that because SDS finds the set of size `n` by building off of set `n-1`, fi
 also previous set sizes from 2-n. 
 
 
-To Run SDS
+To run SDS
 ------------
-Use python 3 to run SDS on the command line, or follow the step-by-step jupyter notebook.
-
-Command line
-```
-python sds.py --mtrx <square_matrix_file_path> --ndis <n_most_dissimilar_items> --benchmark <True/False>
-```
-
-Jupyter notebook
-
-[Here](https://github.com/FelicityN/sds/blob/master/SDS/SDS-notebook-tutorial.ipynb)
+1. import sds
+2. matrix = sds.load(<path_to_matrix_containing_file>)
+3. SDS = sds.downselect.SDS()
+4. SDS.run(matrix, 3) # to yield n=3 structures
 
 
 Citing SDS
