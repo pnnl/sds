@@ -1,28 +1,42 @@
 SDS
 =======
-Similarity Downselection (SDS) is a heuristic, greedy algorithm instantiated in python for finding the subset of n items most dissimilar to each other 
-out of a larger population.
+Similarity down-selection (SDS) is a heuristic, greedy algorithm instantiated in Python for finding the subset of n items most dissimilar to each other out of a larger population.
 
-To Run SDS
+SDS heuristically finds the most dissimilar set of size `n`
+out of a population represented as an NxN matrix where the ith row (as well as the
+ith column) belong to item i, and the element (i,j) is some pairwise relation between 
+items i and j. 
+
+The pairwise relation is a floating point value where larger values indicate
+greater dissimilarity, and where the pairwise relation between item i and itself is represented
+as np.nan (this allows the program to work with numpy log conversion and sums).
+
+SDS was originally written to find the subset of n most dissimiliar conformers 
+(similarity being determined by average pairwise RMSD between atoms).
+In the original implemenation finding the n most dissimlar conformers 
+for 50000x50000 matricies, SDS substationally outperformed a benchmark random sampling method in both 
+time and accuracy. 
+
+Note that because SDS finds the set of size `n` by building off of set `n-1`, finding set `n` also finds
+also previous set sizes from 2-n. 
+
+
+To run SDS
 ------------
-Use python 3 to run SDS on the command line, or follow the step-by-step jupyter notebook.
-
-Command line
-```
-python sds.py --mtrx <square_matrix_file_path> --ndis <n_most_dissimilar_items> --benchmark <True/False>
-```
-
-Jupyter notebook
-
-[Here](https://github.com/FelicityN/sds/blob/master/SDS/SDS-notebook-tutorial.ipynb)
+1. import sds
+2. matrix = sds.load(<path_to_matrix_containing_file>)
+3. n = 3 # to yield n=3 dissimilar elements
+4. SDS = sds.downselect.SDS(matrix, n)
+5. SDS.res # to access result object
 
 
 Citing SDS
 -------------
 If you would like to reference SDS in an academic paper, we ask you include the following.
 The arXiv link will be updated pending completion of the journal review process.
-* SDS, version 0.1.0 http://github.com/pnnl/sds (accessed MMM YYYY)
+* SDS, version 2.0.0 http://github.com/pnnl/sds (accessed MMM YYYY)
 * Felicity F. Nielson, Sean M. Colby, Ryan S. Renslow, Thomas O. Metz. Similarity Downselection: A Python implementation of a heuristic search algorithm for finding the set of the n most dissimilar items with an application in conformer sampling.
+* Felicity F. Nielson, Bill Kay, Stephen J. Young, Sean M. Colby, Ryan S. Renslow, Thomas O. Metz. Similarity Downselection: Finding the n Most Dissimilar Molecular Conformers for Reference-Free Metabolomics.
 
 Disclaimer
 ----------
