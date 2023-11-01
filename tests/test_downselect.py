@@ -16,7 +16,7 @@ def SDS():
     return SDSWrapper()
 
 
-@pytest.mark.parametrize("x,expected", [(3, 3), (2, 2), (21, 20)])
+@pytest.mark.parametrize("x,expected", [(3, 3), (20, 20), (21, 20)])
 def test_SDS(matrix, x, expected):
     testSDS = sds.downselect.SDS(matrix, x)
 
@@ -60,7 +60,7 @@ class TestSDSWrapper:
         # Check dimension vairable, N
         assert SDS.N == len(matrix)
 
-    @pytest.mark.parametrize("x,expected", [(3, 3), (2, 2), (21, 20)])
+    @pytest.mark.parametrize("x,expected", [(3, 3), (20, 20), (21, 20)])
     def test_set_n(self, SDS, matrix, x, expected):
         # Set matrix
         SDS.set_matrix(matrix)
@@ -105,7 +105,7 @@ class TestSDSWrapper:
 
         assert isinstance(SDS.final_sum, float)
 
-    @pytest.mark.parametrize("x,expected", [(3, 3), (2, 2), (21, 20)])
+    @pytest.mark.parametrize("x,expected", [(3, 3), (20, 20), (21, 20)])
     def test_run(self, SDS, matrix, x, expected):
         # Execute run function
         SDS.run(matrix, x)
