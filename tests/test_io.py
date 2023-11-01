@@ -113,7 +113,7 @@ def test_load_numpy(matrix):
 @pytest.mark.parametrize(
     "path,instance",
     [
-        (localfile("resources/test-sds-class.pkl"), sds.downselect.SDS),
+        (localfile("resources/toy-sds-class.pkl"), sds.downselect.SDS),
     ],
 )
 def test_load(sdsclass, path, instance):
@@ -204,7 +204,7 @@ def test_save_tsv(matrix):
 @pytest.mark.parametrize(
     "path",
     [
-        (localfile("resources/test-sds-class.pkl")),
+        (localfile("resources/toy-sds-class.pkl")),
     ],
 )
 def test_save(sdsclass, path):
