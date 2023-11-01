@@ -5,8 +5,8 @@ from math import log
 
 
 class SDSWrapper:
-    _defaults = ["n", "matrix", "N"]
-    _default_value = [3, None, None]
+    _defaults = ["n", "matrix"]
+    _default_value = [3, None]
 
     def __init__(self, **kwargs):
         self.__dict__.update(dict(zip(self._defaults, self._default_value)))
@@ -34,6 +34,8 @@ class SDSWrapper:
         self.n = self._check_n(n)
 
     def search(self):
+        if self.matrix is None:
+            raise ("Matrix must be set prior to search.")
         # First grab matrix indices of the two most dissimilar geometries
         row_mx = []
 
@@ -86,8 +88,6 @@ class SDSWrapper:
     def run(self, matrix, n):
         self.set_matrix(matrix)
         self.set_n(n)
-        self.check_matrix()
-        self.check_nspec()
         self.search()
         self.post_process()
         return self
