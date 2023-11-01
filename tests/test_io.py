@@ -19,7 +19,7 @@ def sdsclass(matrix):
     return testsds
 
 
-def test_load_pickle(sdsclass):
+def test_load_pickle_class(sdsclass):
     # Path to file
     path = localfile("resources/toy-sds-class.pkl")
 
@@ -36,13 +36,13 @@ def test_load_pickle(sdsclass):
     assert hasattr(testsds, "n")
 
     # Check xyz attribute is populated
-    assert sds.matrix is not None
+    assert testsds.matrix is not None
 
     # Clean up
     os.remove(path)
 
 
-def test_load_pickle(matrix):
+def test_load_pickle_matrix(matrix):
     # Path to file
     path = localfile("resources/toy-dataset.pkl")
 
@@ -105,6 +105,117 @@ def test_load_numpy(matrix):
 
     # Check instance is correct type
     assert isinstance(testmatrix, pd.DataFrame)
+
+    # Clean up
+    os.remove(path)
+
+
+@pytest.mark.parametrize(
+    "path,instance",
+    [
+        (localfile("resources/test-sds-class.pkl"), sds.downselect.SDS),
+    ],
+)
+def test_load(sdsclass, path, instance):
+    # Save
+    sds.save(path, sdsclass)
+
+    # Load
+    testdata = sds.load(path)
+
+    # Check not none
+    assert testdata is not None
+
+    # Check correct type
+    assert isinstance(testdata, instance)
+
+    # Clean up
+    os.remove(path)
+
+
+def test_save_csv(matrix):
+    # Output path
+    path = localfile("resources/toy-dataset.csv")
+
+    # Save to xyz
+    sds.io.save_csv(path, matrix)
+
+    # Check path exists
+    assert os.path.exists(path)
+
+    # Check not empty
+    assert os.path.getsize(path) > 0
+
+    # Clean up
+    os.remove(path)
+
+
+def test_save_numpy(matrix):
+    # Output path
+    path = localfile("resources/toy-dataset.npz")
+
+    # Save to xyz
+    sds.io.save_numpy(path, matrix)
+
+    # Check path exists
+    assert os.path.exists(path)
+
+    # Check not empty
+    assert os.path.getsize(path) > 0
+
+    # Clean up
+    os.remove(path)
+
+
+def test_save_pickle(matrix):
+    # Output path
+    path = localfile("resources/toy-dataset.pkl")
+
+    # Save to xyz
+    sds.io.save_pickle(path, matrix)
+
+    # Check path exists
+    assert os.path.exists(path)
+
+    # Check not empty
+    assert os.path.getsize(path) > 0
+
+    # Clean up
+    os.remove(path)
+
+
+def test_save_tsv(matrix):
+    # Output path
+    path = localfile("resources/toy-dataset.tsv")
+
+    # Save to xyz
+    sds.io.save_tsv(path, matrix)
+
+    # Check path exists
+    assert os.path.exists(path)
+
+    # Check not empty
+    assert os.path.getsize(path) > 0
+
+    # Clean up
+    os.remove(path)
+
+
+@pytest.mark.parametrize(
+    "path",
+    [
+        (localfile("resources/test-sds-class.pkl")),
+    ],
+)
+def test_save(sdsclass, path):
+    # Save
+    sds.save(path, sdsclass)
+
+    # Check path exists
+    assert os.path.exists(path)
+
+    # Check not empty
+    assert os.path.getsize(path) > 0
 
     # Clean up
     os.remove(path)
