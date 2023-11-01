@@ -4,7 +4,7 @@ import pandas as pd
 from math import log
 
 
-class SDS:
+class SDSWrapper:
     _defaults = ["n", "matrix", "N"]
     _default_value = [3, None, None]
 
@@ -12,23 +12,26 @@ class SDS:
         self.__dict__.update(dict(zip(self._defaults, self._default_value)))
         self.__dict__.update(**kwargs)
 
+    def _check_matrix(self, matrix):
+        return utils.safematrix(matrix)
+
     def set_matrix(self, matrix):
-        self.matrix = matrix
-
-    def set_n(self, n: int):
-        self.n = n
-
-    def check_matrix(self):
-        utils.safematrix(self.matrix)
+        self.matrix = self._check_matrix(matrix)
         self.N = len(self.matrix)
 
-    def check_nspec(self):
+    def _check_n(self, n):
         """
         Check and reduce n to maximum number of dimension.
         """
         M = len(self.matrix.dropna(how="all"))
-        if self.n > M:
-            self.n = M
+        if n > M:
+            n = M
+        return n
+
+    def set_n(self, n: int):
+        if self.matrix is None:
+            raise ("Matrix must be set prior to n.")
+        self.n = self._check_n(n)
 
     def search(self):
         # First grab matrix indices of the two most dissimilar geometries
@@ -87,5 +90,4 @@ class SDS:
         self.check_nspec()
         self.search()
         self.post_process()
-        self.save()
         return self
