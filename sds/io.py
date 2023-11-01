@@ -15,7 +15,7 @@ def load_csv(path):
 
     Returns
     -------
-    data
+    data, :obj:`~pd.DataFrame`
         Pandas DataFrame of NxN matrix.
 
     """
@@ -35,7 +35,7 @@ def load_numpy(path, key="arr_0"):
 
     Returns
     -------
-    data
+    data, :obj:`~pd.DataFrame`
         Pandas DataFrame of NxN matrix.
 
     """
@@ -57,7 +57,7 @@ def load_pickle(path):
 
     Returns
     -------
-    data
+    data, :obj:`~pd.DataFrame`
         Pandas DataFrame of NxN matrix.
 
     """
@@ -77,7 +77,7 @@ def load_tsv(path):
 
     Returns
     -------
-    data
+    data, :obj:`~pd.DataFrame`
         Pandas DataFrame of NxN matrix.
 
     """
@@ -86,16 +86,16 @@ def load_tsv(path):
 
 def load(path):
     """
-    Load object from file.
+    Load object, format detected by path extension.
 
     Parameters
     ----------
     path : str
-        Path to file containing object.
+        Path to file containing object. Supported extensions include .pkl, .csv, .tsv, .npz
 
     Returns
     -------
-    data
+    data, :obj:`~pd.DataFrame`
         Data object (e.g., Pandas DataFrame of SDS class).
 
     """
@@ -121,7 +121,7 @@ def save_csv(path, obj):
     ----------
     path : str
         Path to output file.
-    obj : `pandas.DataFrame`
+    obj, :obj:`~pd.DataFrame`
         Matrix object as Pandas DataFrame.
     """
     if not isinstance(obj, pd.DataFrame):
@@ -137,7 +137,7 @@ def save_numpy(path, obj):
     ----------
     path : str
         Path to output file.
-    obj : `pandas.DataFrame`
+    obj, :obj:`~pd.DataFrame`
         Matrix object as Pandas DataFrame.
     """
     if not isinstance(obj, pd.DataFrame):
@@ -153,7 +153,7 @@ def save_pickle(path, obj):
     ----------
     path : str
         Path to output file.
-    data : object
+    obj, :obj:`~pd.DataFrame` or `~sds.downselect.SDS`
         Aribtrary object instance.
 
     """
@@ -170,7 +170,7 @@ def save_tsv(path, obj):
     ----------
     path : str
         Path to output file.
-    obj : `pandas.DataFrame`
+    obj, :obj:`~pd.DataFrame`
         Matrix object as Pandas DataFrame.
     """
     if not isinstance(obj, pd.DataFrame):
@@ -185,12 +185,9 @@ def save(path, obj):
     Parameters
     ----------
     path : str
-        Path to save file. Supported extensions include .pkl, .mfj, .xyz, .mol,
-        .pdb, .inchi, .smi.
-    data : obj
-        Object instance. Must be :obj:`~isicle.geometry.Geometry` or
-        :obj:`~isicle.geometry.XYZGeometry` for .xyz and .mfj.
-
+        Path to save file. Supported extensions include .pkl, .csv, .tsv, .npz
+    obj, :obj:`~pd.DataFrame` or `~sds.downselect.SDS`
+        Arbitrary object instance.
     """
     if (type(path)) == str:
         path = path.strip()
