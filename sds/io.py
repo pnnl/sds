@@ -22,7 +22,7 @@ def load_csv(path):
     return pd.read_csv(path)
 
 
-def load_numpy(path):
+def load_numpy(path, key="arr_0"):
     """
     Load numpy file (.npz).
 
@@ -30,6 +30,8 @@ def load_numpy(path):
     ----------
     path : str
         Path to .npz.
+    key : str
+        Accession key of .npz, default is arr_0.
 
     Returns
     -------
@@ -37,8 +39,10 @@ def load_numpy(path):
         Pandas dataframe of NxN matrix.
 
     """
-    npz = np.load(path)
-    df = pd.DataFrame.from_dict({item: npz[item] for item in npz.files}, orient="index")
+    npz = np.load(path)[key]
+    df = pd.DataFrame.from_dict(
+        {elem: item for elem, item in enumerate(npz)}, orient="index"
+    )
     return df
 
 
@@ -100,16 +104,45 @@ def load(path):
         extension = os.path.splitext(path)[-1].lower()
     if extension == ".pkl":
         return load_pickle(path)
-    elif extension == ".npz":
+    if extension == ".npz":
         return load_numpy(path)
-    elif extension == ".csv":
+    if extension == ".csv":
         return load_csv(path)
-    elif extension == ".tsv":
+    if extension == ".tsv":
         return load_tsv(path)
+    raise IOError("Extension {} not recognized.".format(extension))
 
 
 def save_csv(path, obj):
+    """
+    Save Pandas DataFrame as comma separated file.
+
+    Parameters
+    ----------
+    path : str
+        Path to output file.
+    obj : `pandas.DataFrame`
+        Matrix object as Pandas DataFrame.
+    """
+    if not isinstance(obj, pd.DataFrame):
+        raise ValueError("object is not a valid Pandas DataFrame")
     obj.to_csv(path, index=False)
+
+
+def save_numpy(path, obj):
+    """
+    Save Pandas DataFrame as compressed numpy.
+
+    Parameters
+    ----------
+    path : str
+        Path to output file.
+    obj : `pandas.DataFrame`
+        Matrix object as Pandas DataFrame.
+    """
+    if not isinstance(obj, pd.DataFrame):
+        raise ValueError("object is not a valid Pandas DataFrame")
+    np.savez(path, obj.to_numpy())
 
 
 def save_pickle(path, obj):
@@ -129,11 +162,45 @@ def save_pickle(path, obj):
         pickle.dump(obj, f)
 
 
+def save_tsv(path, obj):
+    """
+    Save Pandas DataFrame as tab separated file.
+
+    Parameters
+    ----------
+    path : str
+        Path to output file.
+    obj : `pandas.DataFrame`
+        Matrix object as Pandas DataFrame.
+    """
+    if not isinstance(obj, pd.DataFrame):
+        raise ValueError("object is not a valid Pandas DataFrame")
+    obj.to_csv(path, index=False, sep="\t")
+
+
 def save(path, obj):
+    """
+    Save object, format detected by path extension.
+
+    Parameters
+    ----------
+    path : str
+        Path to save file. Supported extensions include .pkl, .mfj, .xyz, .mol,
+        .pdb, .inchi, .smi.
+    data : obj
+        Object instance. Must be :obj:`~isicle.geometry.Geometry` or
+        :obj:`~isicle.geometry.XYZGeometry` for .xyz and .mfj.
+
+    """
     if (type(path)) == str:
         path = path.strip()
         extension = os.path.splitext(path)[-1].lower()
     if extension == ".csv":
         return save_csv(path, obj)
-    elif extension == ".pkl":
+    if extension == ".tsv":
+        return save_tsv(path, obj)
+    if extension == ".npz":
+        return save_numpy(path, obj)
+    if extension == ".pkl":
         return save_pickle(path, obj)
+    raise IOError("Extension {} not recognized.".format(extension))
