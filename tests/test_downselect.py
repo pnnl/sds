@@ -16,6 +16,26 @@ def SDS():
     return SDSWrapper()
 
 
+@pytest.mark.parametrize("x,expected", [(3, 3), (2, 2), (21, 20)])
+def test_SDS(matrix, x, expected):
+    testSDS = sds.downselect.SDS(matrix, x)
+
+    # Check class initialization
+    assert isinstance(testSDS, SDSWrapper)
+
+    # Check matrix attribute exists
+    assert hasattr(testSDS, "matrix")
+
+    # Check matrix attribute is populated
+    assert testSDS.matrix is not None
+
+    # Check dimension vairable, N
+    assert testSDS.N == len(matrix)
+
+    # Check n attribute
+    assert testSDS.n == expected
+
+
 class TestSDSWrapper:
     def test_init(self, SDS):
         # Check class initialization
