@@ -63,7 +63,7 @@ def load_pickle(path):
     """
     # Load file
     with open(path, "rb") as f:
-        return pd.read_pickle.load(f)
+        return pd.read_pickle(f)
 
 
 def load_tsv(path):
