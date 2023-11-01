@@ -25,8 +25,9 @@ To run SDS
 ------------
 1. import sds
 2. matrix = sds.load(<path_to_matrix_containing_file>)
-3. SDS = sds.downselect.SDS()
-4. SDS.run(matrix, 3) # to yield n=3 structures
+3. n = 3 # to yield n=3 dissimilar elements
+4. SDS = sds.downselect.SDS(matrix, n)
+5. SDS.res # to access result object
 
 
 Citing SDS
