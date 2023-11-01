@@ -16,7 +16,7 @@ def load_csv(path):
     Returns
     -------
     data
-        Pandas dataframe of NxN matrix.
+        Pandas DataFrame of NxN matrix.
 
     """
     return pd.read_csv(path)
@@ -36,7 +36,7 @@ def load_numpy(path, key="arr_0"):
     Returns
     -------
     data
-        Pandas dataframe of NxN matrix.
+        Pandas DataFrame of NxN matrix.
 
     """
     npz = np.load(path)[key]
@@ -58,7 +58,7 @@ def load_pickle(path):
     Returns
     -------
     data
-        Pandas dataframe of NxN matrix.
+        Pandas DataFrame of NxN matrix.
 
     """
     # Load file
@@ -78,7 +78,7 @@ def load_tsv(path):
     Returns
     -------
     data
-        Pandas dataframe of NxN matrix.
+        Pandas DataFrame of NxN matrix.
 
     """
     return pd.read_csv(path, sep="\t")
@@ -86,17 +86,17 @@ def load_tsv(path):
 
 def load(path):
     """
-    Load matrix containing file.
+    Load object from file.
 
     Parameters
     ----------
     path : str
-        Path to file containing matrix.
+        Path to file containing object.
 
     Returns
     -------
     data
-        Pandas dataframe of NxN matrix.
+        Data object (e.g., Pandas DataFrame of SDS class).
 
     """
     if (type(path)) == str:
