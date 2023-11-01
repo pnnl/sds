@@ -31,10 +31,10 @@ def test_load_pickle_class(sdsclass):
     # Check instance is correct type
     assert isinstance(testsds, sds.downselect.SDSWrapper)
 
-    # Check xyz attribute exists
+    # Check n attribute exists
     assert hasattr(testsds, "n")
 
-    # Check xyz attribute is populated
+    # Check matrix attribute is populated
     assert testsds.matrix is not None
 
     # Clean up
@@ -136,7 +136,7 @@ def test_save_csv(matrix):
     # Output path
     path = localfile("resources/toy-dataset.csv")
 
-    # Save to xyz
+    # Save to csv
     sds.io.save_csv(path, matrix)
 
     # Check path exists
@@ -153,7 +153,7 @@ def test_save_numpy(matrix):
     # Output path
     path = localfile("resources/toy-dataset.npz")
 
-    # Save to xyz
+    # Save to numpy
     sds.io.save_numpy(path, matrix)
 
     # Check path exists
@@ -170,7 +170,7 @@ def test_save_pickle(matrix):
     # Output path
     path = localfile("resources/toy-dataset.pkl")
 
-    # Save to xyz
+    # Save to pickle
     sds.io.save_pickle(path, matrix)
 
     # Check path exists
@@ -187,7 +187,7 @@ def test_save_tsv(matrix):
     # Output path
     path = localfile("resources/toy-dataset.tsv")
 
-    # Save to xyz
+    # Save to tsv
     sds.io.save_tsv(path, matrix)
 
     # Check path exists
