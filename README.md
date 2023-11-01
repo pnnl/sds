@@ -33,8 +33,9 @@ Citing SDS
 -------------
 If you would like to reference SDS in an academic paper, we ask you include the following.
 The arXiv link will be updated pending completion of the journal review process.
-* SDS, version 0.1.0 http://github.com/pnnl/sds (accessed MMM YYYY)
+* SDS, version 2.0.0 http://github.com/pnnl/sds (accessed MMM YYYY)
 * Felicity F. Nielson, Sean M. Colby, Ryan S. Renslow, Thomas O. Metz. Similarity Downselection: A Python implementation of a heuristic search algorithm for finding the set of the n most dissimilar items with an application in conformer sampling.
+* Felicity F. Nielson, Bill Kay, Stephen J. Young, Sean M. Colby, Ryan S. Renslow, Thomas O. Metz. Similarity Downselection: Finding the n Most Dissimilar Molecular Conformers for Reference-Free Metabolomics.
 
 Disclaimer
 ----------
