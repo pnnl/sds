@@ -13,9 +13,8 @@ def matrix():
 
 @pytest.fixture
 def sdsclass(matrix):
-    testsds = sds.downselect.SDS()
+    testsds = sds.downselect.SDSWrapper()
     testsds.set_matrix(matrix)
-    testsds.check_matrix()
     return testsds
 
 
@@ -30,7 +29,7 @@ def test_load_pickle_class(sdsclass):
     testsds = sds.io.load_pickle(path)
 
     # Check instance is correct type
-    assert isinstance(testsds, sds.downselect.SDS)
+    assert isinstance(testsds, sds.downselect.SDSWrapper)
 
     # Check xyz attribute exists
     assert hasattr(testsds, "n")
@@ -113,7 +112,7 @@ def test_load_numpy(matrix):
 @pytest.mark.parametrize(
     "path,instance",
     [
-        (localfile("resources/toy-sds-class.pkl"), sds.downselect.SDS),
+        (localfile("resources/toy-sds-class.pkl"), sds.downselect.SDSWrapper),
     ],
 )
 def test_load(sdsclass, path, instance):
