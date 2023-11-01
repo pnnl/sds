@@ -8,7 +8,7 @@ from tests import localfile
 
 @pytest.fixture
 def matrix():
-    return pd.read_csv("toy-dataset.csv")
+    return pd.read_csv(localfile("resources/toy-dataset.csv"))
 
 
 @pytest.fixture
