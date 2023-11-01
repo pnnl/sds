@@ -4,6 +4,10 @@ import pandas as pd
 from math import log
 
 
+def SDS(matrix, n):
+    return SDSWrapper().run(matrix, n)
+
+
 class SDSWrapper:
     """
     Wrapper for Similarity Down Selection functionality.
@@ -156,4 +160,5 @@ class SDSWrapper:
         self.set_n(n)
         self.search()
         self.post_process()
+        self.benchmark()
         return self
